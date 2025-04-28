@@ -1,0 +1,26 @@
+import os
+
+def scan_file(file_path):
+    suspicious_extensions = ['.exe', '.js', '.vbs']  # Common extensions for malware
+    suspicious_keywords = ['eval(', 'exec(', 'powershell']  # Keywords in scripts
+
+    # Check if the specified file exists
+    if os.path.isfile(file_path):
+        try:
+            # Check file extension
+            if os.path.splitext(file_path)[1].lower() in suspicious_extensions:
+                print(f"Suspicious file detected: {file_path}")
+
+            # Open and read the file content
+            with open(file_path, 'rb') as f:
+                content = f.read().decode(errors='ignore')
+                # Check for suspicious keywords
+                if any(keyword in content.lower() for keyword in suspicious_keywords):
+                    print(f"Suspicious script content in file: {file_path}")
+        except Exception as e:
+            print(f"Could not scan {file_path}: {e}")
+    else:
+        print(f"The file is malicious: {file_path}")
+
+# Usage
+scan_file(r'"C:\Users\Vedansh\Desktop\test_vedansh.txt"')  # Replace with the file path
