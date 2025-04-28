@@ -1,0 +1,31 @@
+# List of spam keywords
+spam_keywords = ["win money", "click here", "free gift", "urgent action", "lottery"]
+
+def is_spam(content, keywords):
+    """Check if the content contains any spam keywords."""
+    for keyword in keywords:
+        if keyword.lower() in content.lower():
+            return True
+    return False
+
+def check_email(email_content, keywords):
+    """Check the content of an email for spam keywords."""
+    if is_spam(email_content, keywords):
+        print("Spam detected in email content!")
+    else:
+        print("Email content appears clean.")
+
+# Sample email content
+email_content = """
+Hello there!
+
+You've won money in the lottery! Click here to claim your free gift now.
+This is an urgent action, so act fast!
+
+Best regards,
+Spam Bot
+"""
+
+# Check the sample email content for spam keywords
+check_email(email_content, spam_keywords)
+
